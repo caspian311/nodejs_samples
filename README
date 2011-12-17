@@ -1,0 +1,4 @@
+1. Install node.js
+
+2. run the webserver:
+$ node web.js
