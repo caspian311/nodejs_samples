@@ -6,7 +6,7 @@ var FS = require('fs')
 var PATH = require('path')
 
 var WEBROOT = "./webroot"
-
+var ERRORS = "./errors"
 var MIME_TYPES = {
    default: 'text/plain',
    html: 'text/html',
@@ -30,20 +30,18 @@ todd.fileServer.handleFileRequest = function (url, res) {
 
    PATH.exists(path, function(exists) {
       if (exists) {
-         todd.fileServer.serveFile(url, path, res)
+         todd.fileServer.serveFile(url, path, res, 200)
       } else {
-         console.log('HTTP 404 ' + url)
-         res.writeHead(404)
-         res.end()
+         todd.fileServer.serveFile(url, ERRORS + '/404.html' , res, 404)
       }
    })
 }
 
-todd.fileServer.serveFile = function (url, path, res) {
-   console.log('HTTP 200 ' + url)
+todd.fileServer.serveFile = function (url, path, res, responseCode) {
+   console.log('HTTP ' + responseCode + ' ' + url)
 
    FS.stat(path, function(err, stats) {
-      res.writeHead(200, {
+      res.writeHead(responseCode, {
          'Content-type': todd.fileServer.mimeType(path),
          'Content-length': stats.size
       })
@@ -57,6 +55,5 @@ todd.fileServer.mimeType = function(path) {
    if (!contentType) {
       contentType = MIME_TYPES['default']
    }
-   console.log(extension + ' => ' + contentType)
    return contentType
 }
