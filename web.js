@@ -1,5 +1,4 @@
-var todd = todd || {}
-todd.fileServer = todd.fileServer || {}
+var webserver = webserver || {}
 
 var WEB = require('http')
 var FS = require('fs')
@@ -18,11 +17,11 @@ var MIME_TYPES = {
 }
 
 WEB.createServer(function(req, res) {
-   todd.fileServer.handleFileRequest(req.url, res)
+   webserver.handleFileRequest(req.url, res)
 }).listen(1337, '127.0.0.1')
 console.log('Web server started..')
 
-todd.fileServer.handleFileRequest = function (url, res) {
+webserver.handleFileRequest = function (url, res) {
    var path = WEBROOT + url
    if (url == '/') {
       path = WEBROOT + '/index.html'
@@ -30,26 +29,26 @@ todd.fileServer.handleFileRequest = function (url, res) {
 
    PATH.exists(path, function(exists) {
       if (exists) {
-         todd.fileServer.serveFile(url, path, res, 200)
+         webserver.serveFile(url, path, res, 200)
       } else {
-         todd.fileServer.serveFile(url, ERRORS + '/404.html' , res, 404)
+         webserver.serveFile(url, ERRORS + '/404.html' , res, 404)
       }
    })
 }
 
-todd.fileServer.serveFile = function (url, path, res, responseCode) {
+webserver.serveFile = function (url, path, res, responseCode) {
    console.log('HTTP ' + responseCode + ' ' + url)
 
    FS.stat(path, function(err, stats) {
       res.writeHead(responseCode, {
-         'Content-type': todd.fileServer.mimeType(path),
+         'Content-type': webserver.mimeType(path),
          'Content-length': stats.size
       })
       FS.createReadStream(path).pipe(res)
    })
 }
 
-todd.fileServer.mimeType = function(path) {
+webserver.mimeType = function(path) {
    var extension = path.substring(path.lastIndexOf('.') + 1)
    var contentType = MIME_TYPES[extension]
    if (!contentType) {
