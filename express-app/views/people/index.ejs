@@ -1,6 +1,12 @@
 <h1>People</h1>
 
+<% if (people.length == 0) { %>
+   No people have been entered yet. <br />
+<% } %>
 <% people.each(function(person) { %>
-   <a href="people/<%= person.id %>"><%= person.firstName + ' ' + person.lastName %></a><br/>
+   <%= person.firstName + ' ' + person.lastName %>
+   <a href="people/<%= person.id %>">Edit</a>
+   <a href="#" id="<%= person.id %>" class="delete">Delete</a>
+   <br/>
 <% }) %>
-<a href="people/new">New person</a>
+<a href="people/new">Enter a new person</a>
