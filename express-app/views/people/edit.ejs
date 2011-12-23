@@ -1,0 +1,23 @@
+<form method="POST" action="/people">
+<input type="hidden" name="person[id]" value="<%= person.id %>" />
+<input type="hidden" name="_method" value="put" />
+<table>
+<tr>
+<td>First Name</td>
+</tr>
+<tr>
+<td>
+<input type="text" name="person[firstName]" value="<%= person.firstName %>" />
+</td>
+</tr>
+<tr>
+<td>Last Name</td>
+</tr>
+<tr>
+<td>
+<input type="text" name="person[lastName]" value="<%= person.lastName %>" />
+</td>
+</tr>
+</table>
+<input type="submit" value="Submit" />
+</form>

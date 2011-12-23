@@ -1,0 +1,6 @@
+<h1>People</h1>
+
+<% people.each(function(person) { %>
+   <a href="people/<%= person.id %>"><%= person.firstName + ' ' + person.lastName %></a><br/>
+<% }) %>
+<a href="people/new">New person</a>
