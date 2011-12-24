@@ -14,8 +14,11 @@
 
 ## install pre-requisites
 ```$ sudo apt-get install -y nodejs npm```
+
 ```$ npm install express```
+
 ```$ npm install mongoose```
+
 ```$ npm install ejs```
 
 ## start server                 
