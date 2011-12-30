@@ -1,4 +1,4 @@
-require('./util.js');
+require('./lib/helper');
 
 var express = require('express');
 var app = express.createServer();
@@ -17,4 +17,4 @@ app.get('/', function(req, res){
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/sample1');
 
-require('./people.js').initialize(app, mongoose);
+require('./lib/people').initialize(app, mongoose);
