@@ -5,8 +5,8 @@
 <% } %>
 <% people.each(function(person) { %>
    <%= person.firstName + ' ' + person.lastName %>
-   <a href="people/<%= person.id %>">Edit</a>
+   <a href="/people/<%= person.id %>/edit">Edit</a>
    <a href="#" id="<%= person.id %>" class="delete">Delete</a>
    <br/>
 <% }) %>
-<a href="people/new">Enter a new person</a>
+<a href="/people/new">Enter a new person</a>

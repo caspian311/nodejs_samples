@@ -1,6 +1,7 @@
 require('./lib/helper');
 
 var express = require('express');
+var resource = require('express-resource');
 var app = express.createServer();
 app.configure(function() {
    this.set('view engine', 'ejs');
@@ -17,4 +18,4 @@ app.get('/', function(req, res){
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/sample1');
 
-require('./lib/people').initialize(app, mongoose);
+app.resource('people', require('./lib/people'));

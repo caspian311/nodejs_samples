@@ -1,4 +1,4 @@
-<form method="POST" action="/people">
+<form method="POST" action="/people/<%= person.id %>">
 <input type="hidden" name="person[id]" value="<%= person.id %>" />
 <input type="hidden" name="_method" value="put" />
 <table>

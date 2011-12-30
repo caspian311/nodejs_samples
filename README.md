@@ -17,6 +17,8 @@
 
 ```$ npm install express```
 
+```$ npm install express-resource```
+
 ```$ npm install mongoose```
 
 ```$ npm install ejs```
