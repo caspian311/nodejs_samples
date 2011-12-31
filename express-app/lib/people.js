@@ -1,4 +1,3 @@
-var util = require('util');
 var mongoose = require('mongoose');
 
 var PersonSchema = new mongoose.Schema({
@@ -14,9 +13,6 @@ exports.index = function(req, res){
 
 function showAllPeople(req, res) {
    Person.find(function(err, people) {
-      people.each(function(entity) {
-         console.log(util.inspect(entity));
-      });
       res.render('people/index', {people: people});
    });
 }
@@ -27,7 +23,6 @@ exports.new = function(req, res){
 
 exports.destroy = function(req, res){
    var id = req.params.person;
-   console.log('deleting person: ' + id);
    Person.findById(id, function(err, doc) {
       doc.remove(function(err) {
          res.send({});
@@ -48,7 +43,6 @@ exports.create = function(req, res){
    person.lastName = req.body.person.lastName;
    person.middleName = req.body.person.middleName;
    person.save(function(err) {
-      console.log('creating: ' + util.inspect(person));
       showAllPeople(req, res);
    });
 };
@@ -60,7 +54,6 @@ exports.update = function(req, res){
       doc.lastName = req.body.person.lastName;
       doc.middleName = req.body.person.middleName;
       doc.save(function(err)  {
-         console.log('updating: ' + doc);
          showAllPeople(req, res);
       });
    });
