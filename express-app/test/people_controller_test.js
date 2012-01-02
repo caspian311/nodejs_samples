@@ -1,30 +1,11 @@
 require('should');
 
 var mongoose = require('mongoose');
-var personSchema = new mongoose.Schema({
-   firstName: String,
-   lastName: String,
-   middleName: String
-});
-var Person = mongoose.model('Person', personSchema);
+var Person = mongoose.model('Person',  new mongoose.Schema());
 
-var testObject;
-testObject = require('../lib/people_controller.js');
+var testObject = require('../lib/people_controller.js');
 
 describe('PeopleController', function() {
-   beforeEach(function() {
-      mongoose.connect('mongodb://localhost/sample1_test');
-      Person.find(function(err, docs) {
-         docs.forEach(function(doc) {
-            doc.remove();
-         });
-      });
-   });
-
-   afterEach(function() {
-      mongoose.disconnect();
-   });
-
    describe('#index', function() {
       it('should show all people', function() {
          var people = [{}, {}];
