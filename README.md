@@ -23,6 +23,10 @@
 
 ```$ npm install ejs```
 
+```$ npm install mocha```
+
+```$ npm install should```
+
 ## start server                 
 ```$ node app.js```
 
