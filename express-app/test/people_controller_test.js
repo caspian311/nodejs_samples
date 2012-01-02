@@ -1,5 +1,4 @@
 require('should');
-var util = require('util');
 
 var mongoose = require('mongoose');
 var personSchema = new mongoose.Schema({
@@ -15,10 +14,11 @@ testObject = require('../lib/people_controller.js');
 describe('PeopleController', function() {
    beforeEach(function() {
       mongoose.connect('mongodb://localhost/sample1_test');
-      Person.find(function(doc) {
-         doc.remove();
+      Person.find(function(err, docs) {
+         docs.forEach(function(doc) {
+            doc.remove();
+         });
       });
-
    });
 
    afterEach(function() {
@@ -26,12 +26,12 @@ describe('PeopleController', function() {
    });
 
    describe('#index', function() {
-      it("should show all people", function() {
-         var person1 = new Person();
-         var person2 = new Person();
+      it('should show all people', function() {
+         var people = [{}, {}];
 
-         person1.save();
-         person2.save();
+         Person.find = function(callback) {
+            callback({}, people);
+         };
 
          var _view;
          var _obj;
@@ -43,8 +43,6 @@ describe('PeopleController', function() {
          };
 
          testObject.index({}, res);
-
-         console.log('response object:', util.inspect(_obj));
 
          _view.should.equal('people/index');
          _obj.should.have.property.people;
