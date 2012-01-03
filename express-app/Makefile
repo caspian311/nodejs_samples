@@ -1,5 +1,5 @@
 
 tests:
-	mocha test/*test.js
+	mocha --reporter spec test/*test.js
 
 all: tests
