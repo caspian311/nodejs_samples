@@ -14,20 +14,34 @@ describe('PeopleController', function() {
             callback({}, people);
          };
 
-         var _view;
          var _obj;
          var res = {
             render: function(view, obj) {
-               _view = view;
                _obj = obj;
             }
          };
 
          testObject.index({}, res);
 
-         _view.should.equal('people/index');
          _obj.should.have.property.people;
          _obj.people.length.should.equal(2);
+      });
+
+      it('should display the people/index view', function() {
+         Person.find = function(callback) {
+            callback({}, {});
+         };
+
+         var _view;
+         var res = {
+            render: function(view, obj) {
+               _view = view;
+            }
+         };
+
+         testObject.index({}, res);
+
+         _view.should.equal('people/index');
       });
    });
 });
